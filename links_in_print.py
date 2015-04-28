@@ -15,16 +15,20 @@ def parse_for_links(article_generator):
            if len(href) == 0 or href[0] == '#':
                continue  # do not print internal links
 
-           links.append(href)
+           if href in links:
+               index = links.index(href) + 1
+           else:
+               links.append(href)
+               index = len(links)
+
            sup = dom.createElement("sup")
            sup.setAttribute("class", "print")
-           sup.appendChild(dom.createTextNode(prefix + str(len(links))))
+           sup.appendChild(dom.createTextNode(prefix + str(index)))
 
            if link.nextSibling:
                link.parentNode.insertBefore(sup, link.nextSibling)
            else:
                link.parentNode.appendChild(sup)
-
 
         if links == []:
             continue
