@@ -42,6 +42,7 @@ def parse_for_links(article_generator):
         # Actual Links
         links_div = dom.createElement("div")
         links_div.setAttribute("class", "print")
+        links_div.setAttribute("style", "margin-left: 2.0em;")
         link_list = dom.createElement("ol")
         link_list.setAttribute("class", "print-links")
         for link in links:
@@ -59,4 +60,3 @@ def parse_for_links(article_generator):
 
 def register():
     signals.article_generator_finalized.connect(parse_for_links)
-
